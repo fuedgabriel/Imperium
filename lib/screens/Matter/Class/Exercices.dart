@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -135,7 +133,7 @@ class _ExercicesState extends State<Exercices> {
                                               ),
                                             ),
                                             onOkButtonPressed: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => Start(search[index].title)));
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => Start(search[index].title, search[index].sId)));
                                             },
                                           ));
                                     },

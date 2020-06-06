@@ -108,7 +108,6 @@ class Login extends StatelessWidget {
                     Navigator.pushReplacementNamed(context, '/BottonBar');
                   }
                   else{
-
                     showGeneralDialog(
                         barrierColor: Colors.black.withOpacity(0.5),
                         transitionBuilder: (context, a1, a2, widget) {
