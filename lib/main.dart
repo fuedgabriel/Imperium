@@ -12,9 +12,12 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Imperium',
+      debugShowCheckedModeBanner: false,
+      debugShowMaterialGrid: false,
       home: Login(),
       routes: <String, WidgetBuilder>{
         '/BottonBar': (BuildContext context) => BottonBar(),
+        '/Login': (BuildContext context) => Login(),
 
       },
     );

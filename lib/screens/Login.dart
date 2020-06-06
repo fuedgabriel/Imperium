@@ -132,6 +132,9 @@ class Login extends StatelessWidget {
                         barrierLabel: '',
                         context: context,
                         pageBuilder: (context, animation1, animation2) {var a; return a; });
+                    Future.delayed(Duration(milliseconds: 1500), () {
+                      Navigator.pop(context);
+                    });
                   }
                 });
               },

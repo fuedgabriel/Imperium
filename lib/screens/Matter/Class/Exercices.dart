@@ -1,12 +1,15 @@
 import 'dart:convert';
+import 'package:android/request/Json/Matter/JsonColector.dart';
+import 'package:android/request/Json/Matter/JsonExercises.dart';
 import 'package:flutter/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Exercices/Start.dart';
 import 'package:android/request/RequestMatter.dart';
 import 'package:android/request/Json/Matter/JsonQuestion.dart';
-
+import 'package:android/request/RequestMatter.dart';
 
 class Exercices extends StatefulWidget {
   final String id;
@@ -27,6 +30,8 @@ const List<Key> keys = [
 ];
 class _ExercicesState extends State<Exercices> {
   List<JsonQuestion> search;
+
+
 
   buildContainer() {
     return Container(
@@ -90,52 +95,94 @@ class _ExercicesState extends State<Exercices> {
                                         )
                                       ],
                                     ),
-                                    onTap: (){
-                                      showDialog(
-                                          context: context,
-                                          builder: (_) => NetworkGiffyDialog(
-                                            key: keys[1],
-                                            image: ListView(
-                                              padding: EdgeInsets.all(18),
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: EdgeInsets.all(10),
-                                                  child: Text(
-                                                    'Seu Progresso',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 22.0, fontWeight: FontWeight.w600),
-                                                  ),
-                                                ),
-                                                CircularPercentIndicator(
-                                                  radius: 120.0,
-                                                  lineWidth: 13.0,
-                                                  animation: true,
-                                                  percent: 0.7,
-                                                  center: Text(
-                                                    "70.0%",
-                                                    style:
-                                                    TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                                                  ),
-                                                  circularStrokeCap: CircularStrokeCap.round,
-                                                  progressColor: Colors.brown,
-                                                ),
-                                              ],
-                                            ),
-                                            entryAnimation: EntryAnimation.BOTTOM,
-                                            title: Text(
-                                                ''
-                                            ),
-                                            buttonOkText: Text(
-                                              'Iniciar',
-                                              style: TextStyle(
-                                                  color: Colors.white
-                                              ),
-                                            ),
-                                            onOkButtonPressed: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => Start(search[index].title, search[index].sId)));
-                                            },
-                                          ));
+                                    onTap: ()async{
+                                      List<JsonColector> Colector;
+                                      List<JsonExercises> Exercises;
+                                      int indexExercices = 0;
+
+                                      double percent = 0.0;
+                                      String percentText = '%';
+                                      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                                      APIMatter.SelectorSearch(prefs.getString('_id'), search[index].sId).then((valor){
+                                        Iterable decode = json.decode(valor.body);
+                                        Colector = decode.map((model) => JsonColector.fromJson(model)).toList();
+                                        setState(() {
+                                          if(Colector.toString() == '[]'){
+                                            indexExercices = 0;
+                                          }
+                                          else{
+                                            if(Colector[0].percent == null){
+                                              indexExercices = 0;
+                                            }
+                                            else{
+                                              indexExercices = Colector[0].percent;
+                                            }
+                                          }
+                                          APIMatter.ExercisesSearch(search[index].sId).then((response) async{
+                                            Iterable list = json.decode(response.body);
+                                            setState(() {
+                                              Exercises = list.map((model) => JsonExercises.fromJson(model)).toList();
+                                              if(Colector.toString() == '[]'|| Colector == null){
+                                                percent = 0.0;
+                                              }else{
+                                                percent = Colector[0].percent/Exercises.length;
+                                              }
+                                              percentText = '%';
+                                              percentText = (percent*100).toString()+percentText;
+                                              print(percentText);
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (_) => NetworkGiffyDialog(
+                                                    key: keys[1],
+                                                    image: ListView(
+                                                      padding: EdgeInsets.all(18),
+                                                      children: <Widget>[
+                                                        Padding(
+                                                          padding: EdgeInsets.all(10),
+                                                          child: Text(
+                                                            'Seu Progresso',
+                                                            textAlign: TextAlign.center,
+                                                            style: TextStyle(
+                                                                fontSize: 22.0, fontWeight: FontWeight.w600),
+                                                          ),
+                                                        ),
+                                                        CircularPercentIndicator(
+                                                          radius: 120.0,
+                                                          lineWidth: 13.0,
+                                                          animation: true,
+                                                          percent: percent,
+                                                          center: Text(
+                                                            percentText,
+                                                            style:
+                                                            TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                                                          ),
+                                                          circularStrokeCap: CircularStrokeCap.round,
+                                                          progressColor: Colors.brown,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    entryAnimation: EntryAnimation.BOTTOM,
+                                                    title: Text(
+                                                        ''
+                                                    ),
+                                                    buttonOkText: Text(
+                                                      'Iniciar',
+                                                      style: TextStyle(
+                                                          color: Colors.white
+                                                      ),
+                                                    ),
+                                                    onOkButtonPressed: () {
+                                                      Navigator.pop(context);
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Start(search[index].title, search[index].sId)));
+
+                                                    },
+                                                  ));
+                                            });
+                                          });
+                                        });
+                                      });
+
                                     },
                                   ),
                                 ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:android/request/RequestMatter.dart';
 import 'package:android/request/Json/Matter/JsonExercises.dart';
@@ -171,59 +172,27 @@ class _StartState extends State<Start> {
                 ],
               ),
               onPressed: () {
-                if(Exercises[indexExercices].correct == _character.index){
+                print(Exercises[indexExercices].correct);
+                print(_character.index);
+                if(Exercises[indexExercices].correct-1 == _character.index){
                   showGeneralDialog(
                       barrierColor: Colors.black.withOpacity(0.5),
                       transitionBuilder: (context, a1, a2, widget) {
-                        return AlertDialog(
-                          title: Center(child: Text('Parabéns, vocè acertou a questão', style: TextStyle(color: Colors.black.withOpacity(0.5), fontSize: 16), )),
-                          content: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children : <Widget>[
-                              Expanded(
-                                child: Text(
-                                  'Deseja tentar novamente?',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.green,
-
-                                  ),
+                        return Transform.scale(
+                          scale: a1.value,
+                          child: Opacity(
+                            opacity: a1.value,
+                            child: AlertDialog(
+                              shape: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16.0)),
+                              title: Text('Parabéns, você acertou a questão.',
+                                style: TextStyle(
+                                  fontSize: 15.6,
+                                  color: Colors.green
                                 ),
-                              )
-                            ],
-                          ),
-                          actions: <Widget>[
-                            FlatButton(
-                              child: Text('Sim',),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              color: Colors.green,
+                              ),
                             ),
-                            FlatButton(
-                              child: Text('Não'),
-                              onPressed: () {
-                                setState(() {
-                                  if(Exercises[indexExercices].correct == 1){
-                                    AnserwA = Colors.yellow;
-                                  }else if(Exercises[indexExercices].correct == 2){
-                                    AnserwB = Colors.yellow;
-                                  }
-                                  else if(Exercises[indexExercices].correct == 3){
-                                    AnserwC = Colors.yellow;
-                                  }else if(Exercises[indexExercices].correct == 4){
-                                    AnserwD = Colors.yellow;
-                                  }else if(Exercises[indexExercices].correct == 5){
-                                    AnserwE = Colors.yellow;
-                                  }
-
-                                });
-                                Navigator.of(context).pop();
-                              },
-                              color: Colors.red,
-                            )
-                          ],
+                          ),
                         );
                       },
                       transitionDuration: Duration(milliseconds: 500),
@@ -231,6 +200,12 @@ class _StartState extends State<Start> {
                       barrierLabel: '',
                       context: context,
                       pageBuilder: (context, animation1, animation2) {var a; return a; });
+                  Future.delayed(Duration(milliseconds: 2000), () {
+                    Navigator.pop(context);
+                  });
+                  indexExercices = indexExercices+1;
+                  _ChangeText(indexExercices);
+                  _UpdateColector(indexExercices);
                 }else{
                   showGeneralDialog(
                       barrierColor: Colors.black.withOpacity(0.5),
@@ -312,20 +287,7 @@ class _StartState extends State<Start> {
         ),
       ),
       appBar: AppBar(
-          actions: <Widget>[
-            Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: GestureDetector(
-                  onTap: () {
-
-                  },
-                  child: Icon(
-                    Icons.list,
-                    size: 30,
-                  ),
-                )
-            ),],
-          backgroundColor: Colors.indigoAccent,
+          backgroundColor: HexColor('#480064'),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(0), bottom: Radius.circular(40)),),
           title: Center(child: Text(widget.title,))
       ),
@@ -344,26 +306,31 @@ class _StartState extends State<Start> {
                 itemCount: indexExercicesBuilder,
                 itemBuilder: (BuildContext context, int index) {
 
-                  return Container(
-                    margin: const EdgeInsets.all(4.0),
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.amber[800]
+                  return GestureDetector(
+                    child: Container(
+                      margin: const EdgeInsets.all(4.0),
+                      width: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                            width: 1,
+                            color: Colors.amber[800]
+                        ),
+                      ),
+                      child:  Center(
+                          child: Text(
+                            index.toString(),
+                            style: TextStyle(
+                              fontFamily: 'Georgia',
+                              color: Colors.brown,
+                              fontSize: 28,
+                            ),
+                          )
                       ),
                     ),
-                    child:  Center(
-                        child: Text(
-                          index.toString(),
-                          style: TextStyle(
-                            fontFamily: 'Georgia',
-                            color: Colors.brown,
-                            fontSize: 28,
-                          ),
-                        )
-                    ),
+                    onTap: (){
+                      _ChangeText(index);
+                    },
                   );
                 },
               )

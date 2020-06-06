@@ -1,19 +1,57 @@
+import 'dart:convert';
+
+import 'package:android/request/RequestHome.dart';
 import 'package:flutter/material.dart';
 import 'widgets/card.dart';
+import 'package:android/request/Json/Home/JsonEpisteme.dart';
 class Home extends StatefulWidget {
   @override
   _Home createState() => _Home();
 }
-const List<String> matter = ['Matemática', 'Filosofia', 'Biologia', 'Redação'];
-const List<String> images = ['math.jpg', 'filosofia.jpg', 'biologia.png', 'redacao.png'];
-
-const List<String> newsTitle = ['Inep divulga critérios para correção da redação do Enem; objetivo é ajudar estudantes a se prepararem para a prova', 'Inscritos no Enem 2020 passam de 5,5 milhões, diz ministro'];
-const List<String> newsSub = ['Aulas estão suspensas em todo o Brasil. Apesar da divulgação do material, parte dos candidatos pode não ter acesso à ele: 66% dos brasileiros de 9 a 17 anos não acessam a internet em casa.', 'Nesta sexta-feira (22), o MEC anunciou a prorrogação das inscrições. Data da provas também foi adiada por causa da pandemia de coronavírus.',];
-const List<String> imagesnews = ['https://s2.glbimg.com/Bl4ugEMykW7o1buhL3UygK6k6QM=/0x0:1086x652/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2020/q/g/q4UBRnSuAS0dcwHJIrTQ/distancia.jpg', 'https://www.rgl.com.br/img/cf738ff79632e09399d3f5e54de4a639/0/1',];
-
-
 
 class _Home extends State<Home> {
+  List ImageZero = [];
+  List TitleZero = [];
+  List LinkZero = [];
+
+  List ImageOne = [];
+  List TitleOne = [];
+  List LinkOne = [];
+
+  List ImageTwo = [];
+  List TitleTwo = [];
+  List LinkTwo = [];
+
+
+  _Home(){
+    API.Episteme(0).then((response){
+      setState(() {
+        Iterable listZero = json.decode(response.body);
+        List<JsonEpisteme> EspitemeZero = listZero.map((model) => JsonEpisteme.fromJson(model)).toList();
+        ImageZero.addAll(EspitemeZero.map((f) => f.image).toList());
+        TitleZero.addAll(EspitemeZero.map((f) => f.title).toList());
+        LinkZero.addAll(EspitemeZero.map((f) => f.link).toList());
+      });
+    });
+    API.Episteme(1).then((response){
+      setState(() {
+        Iterable listZero = json.decode(response.body);
+        List<JsonEpisteme> EspitemeOne = listZero.map((model) => JsonEpisteme.fromJson(model)).toList();
+        ImageOne.addAll(EspitemeOne.map((f) => f.image).toList());
+        TitleOne.addAll(EspitemeOne.map((f) => f.title).toList());
+        LinkOne.addAll(EspitemeOne.map((f) => f.link).toList());
+      });
+    });
+    API.Episteme(2).then((response){
+      setState(() {
+        Iterable listZero = json.decode(response.body);
+        List<JsonEpisteme> EspitemeTwo = listZero.map((model) => JsonEpisteme.fromJson(model)).toList();
+        ImageTwo.addAll(EspitemeTwo.map((f) => f.image).toList());
+        TitleTwo.addAll(EspitemeTwo.map((f) => f.title).toList());
+        LinkTwo.addAll(EspitemeTwo.map((f) => f.link).toList());
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +59,11 @@ class _Home extends State<Home> {
       backgroundColor: Colors.deepPurple,
       body: ListView(
         children: <Widget>[
-          ContentScrollMatter(matter: matter,images: images,), ContentScrollNews(newsTitle: newsTitle, newsSub: newsSub, images: imagesnews,)],),
+          ContentScrollNews(typpe: 'Notícias', newsTitle: TitleZero, images: ImageZero, link: LinkZero,),
+          ContentScrollNews(typpe: 'Repertório', newsTitle: TitleOne, images: ImageOne, link: LinkOne,),
+          ContentScrollNews(typpe: 'Política', newsTitle: TitleTwo, images: ImageTwo, link: LinkTwo,),
+        ]
+      )
     );
   }
 }

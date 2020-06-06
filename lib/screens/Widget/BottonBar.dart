@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 //page
+import '../Config/Config.dart';
 import '../Matter/Matter.dart';
 import '../Home/Home.dart';
 import '../News/News.dart';
@@ -22,7 +23,8 @@ class _BottonBar extends State<BottonBar> {
   final tabs = [
     Matter(),
     News(),
-    Home()
+    Home(),
+    Config()
   ];
 
   @override
@@ -53,10 +55,6 @@ class _BottonBar extends State<BottonBar> {
               title: Text('Início'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              title: Text('Notificações'),
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.settings),
               title: Text('Configurações'),
             ),
@@ -78,7 +76,8 @@ class _BottonBar extends State<BottonBar> {
         children: <Widget>[
           Matter(),
           News(),
-          Home()
+          Home(),
+          Config()
         ],
       ),
     );
