@@ -1,15 +1,15 @@
 import 'dart:convert';
-import 'package:android/request/Json/Matter/JsonColector.dart';
-import 'package:android/request/Json/Matter/JsonExercises.dart';
+import 'package:Imperium/request/Json/Matter/JsonColector.dart';
+import 'package:Imperium/request/Json/Matter/JsonExercises.dart';
 import 'package:flutter/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Exercices/Start.dart';
-import 'package:android/request/RequestMatter.dart';
-import 'package:android/request/Json/Matter/JsonQuestion.dart';
-import 'package:android/request/RequestMatter.dart';
+import 'package:Imperium/request/RequestMatter.dart';
+import 'package:Imperium/request/Json/Matter/JsonQuestion.dart';
+import 'package:Imperium/request/RequestMatter.dart';
 
 class Exercices extends StatefulWidget {
   final String id;

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:android/request/RequestHome.dart';
+import 'package:Imperium/request/RequestHome.dart';
 import 'package:flutter/material.dart';
 import 'widgets/card.dart';
-import 'package:android/request/Json/Home/JsonEpisteme.dart';
+import 'package:Imperium/request/Json/Home/JsonEpisteme.dart';
 class Home extends StatefulWidget {
   @override
   _Home createState() => _Home();

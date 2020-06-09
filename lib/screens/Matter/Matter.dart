@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'widgets/MyCourses.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:android/request/RequestHome.dart';
-import 'package:android/request/Json/Home/JsonMatter.dart';
+import 'package:Imperium/request/RequestHome.dart';
+import 'package:Imperium/request/Json/Home/JsonMatter.dart';
 //pages
 class Matter extends StatefulWidget {
   @override

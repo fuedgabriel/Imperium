@@ -74,7 +74,16 @@ class _ConfigState extends State<Config> {
               subtitle: Text('(21) 9 9900-5045', style: TextStyle(color: Colors.yellow),),
               trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {
-                _launchURL('https://api.whatsapp.com/send?phone=02199900-5045');
+                _launchURL('https://api.whatsapp.com/send?phone=+5502199900-5045');
+              },
+            ),
+            ListTile(
+              leading: Container(child: Image(image: NetworkImage('https://cdn.iconscout.com/icon/free/png-256/facebook-logo-2019-1597680-1350125.png'), ), height: 32,),
+              title: Text('Facebook', style: TextStyle(color: Colors.white),),
+              subtitle: Text('Imperium Concursos @imperiumconcursos', style: TextStyle(color: Colors.yellow),),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                _launchURL('https://www.facebook.com/imperiumconcursos/');
               },
             ),
             ListTile(

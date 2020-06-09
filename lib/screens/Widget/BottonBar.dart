@@ -40,7 +40,6 @@ class _BottonBar extends State<BottonBar> {
           unselectedLabelStyle: TextStyle(
               color: Colors.grey
           ),
-
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
