@@ -9,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Exercices/Start.dart';
 import 'package:Imperium/request/RequestMatter.dart';
 import 'package:Imperium/request/Json/Matter/JsonQuestion.dart';
-import 'package:Imperium/request/RequestMatter.dart';
 
 class Exercices extends StatefulWidget {
   final String id;
@@ -20,14 +19,6 @@ class Exercices extends StatefulWidget {
 }
 
 
-const List<Key> keys = [
-  Key("Network"),
-  Key("NetworkDialog"),
-  Key("Flare"),
-  Key("FlareDialog"),
-  Key("Asset"),
-  Key("AssetDialog")
-];
 class _ExercicesState extends State<Exercices> {
   List<JsonQuestion> search;
 
@@ -134,7 +125,6 @@ class _ExercicesState extends State<Exercices> {
                                               showDialog(
                                                   context: context,
                                                   builder: (_) => NetworkGiffyDialog(
-                                                    key: keys[1],
                                                     image: ListView(
                                                       padding: EdgeInsets.all(18),
                                                       children: <Widget>[

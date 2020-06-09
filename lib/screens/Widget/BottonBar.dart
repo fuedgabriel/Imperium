@@ -67,6 +67,7 @@ class _BottonBar extends State<BottonBar> {
         ),
       body: PageView(
         controller: _c,
+
         onPageChanged: (newPage){
           setState((){
             this._currentIndex=newPage;

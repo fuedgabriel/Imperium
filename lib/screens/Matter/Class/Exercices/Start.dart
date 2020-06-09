@@ -60,10 +60,12 @@ class _StartState extends State<Start> {
         setState(() {
           if(Colector.toString() == '[]'){
             indexExercices = 0;
+            APIMatter.SelectorInsert(prefs.getString('_id'), id, 0);
           }
           else{
             if(Colector[0].percent == null){
               indexExercices = 0;
+
             }
             else{
               indexExercices = Colector[0].percent;
@@ -74,11 +76,17 @@ class _StartState extends State<Start> {
       });
     });
   }
-  _UpdateColector(index) async{
-    if(index >= Colector[0].percent){
-      APIMatter.SelectorUpdate(Colector[0].sId, index);
-    }
+  _RenewColector(index) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    APIMatter.SelectorSearch(prefs.getString('_id'), widget.id).then((valor){
+      Iterable decode = json.decode(valor.body);
+      Colector = decode.map((model) => JsonColector.fromJson(model)).toList();
+      if(index >= Colector[0].percent){
+        APIMatter.SelectorUpdate(Colector[0].sId, index);
+      }
+    });
   }
+
 
 
   SingingCharacter _character;
@@ -204,8 +212,8 @@ class _StartState extends State<Start> {
                     Navigator.pop(context);
                   });
                   indexExercices = indexExercices+1;
+                  _RenewColector(indexExercices);
                   _ChangeText(indexExercices);
-                  _UpdateColector(indexExercices);
                 }else{
                   showGeneralDialog(
                       barrierColor: Colors.black.withOpacity(0.5),
@@ -278,9 +286,8 @@ class _StartState extends State<Start> {
               color: Colors.black.withOpacity(0.5),
               onPressed: (){
                 indexExercices = indexExercices+1;
+                _RenewColector(indexExercices);
                 _ChangeText(indexExercices);
-                _UpdateColector(indexExercices);
-
               },
             )
           ],

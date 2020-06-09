@@ -106,7 +106,7 @@ class _ConfigState extends State<Config> {
             ),
             ListTile(
               leading: Icon(Icons.email, color: Colors.white, size: 32,),
-              title: Text('Envie uma sugetão ou crítica do aplicativo', style: TextStyle(color: Colors.white, ) ,),
+              title: Text('Envie uma sugestão ou crítica do aplicativo', style: TextStyle(color: Colors.white, ) ,),
               subtitle: Text('fuedgabriel@hotmail.com', style: TextStyle(color: Colors.yellow),),
               trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {

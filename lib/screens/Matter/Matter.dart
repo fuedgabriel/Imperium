@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'widgets/MyCourses.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Imperium/request/RequestHome.dart';

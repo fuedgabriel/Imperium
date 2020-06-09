@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-
-//pages
-import '../List.dart';
 // ignore: must_be_immutable
 class Comments extends StatelessWidget {
   final String Title;
