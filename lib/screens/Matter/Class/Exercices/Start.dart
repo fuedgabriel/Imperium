@@ -65,7 +65,6 @@ class _StartState extends State<Start> {
           else{
             if(Colector[0].percent == null){
               indexExercices = 0;
-
             }
             else{
               indexExercices = Colector[0].percent;
@@ -81,7 +80,7 @@ class _StartState extends State<Start> {
     APIMatter.SelectorSearch(prefs.getString('_id'), widget.id).then((valor){
       Iterable decode = json.decode(valor.body);
       Colector = decode.map((model) => JsonColector.fromJson(model)).toList();
-      if(index >= Colector[0].percent){
+      if(index >= Colector[0].percent && index <= Exercises.length){
         APIMatter.SelectorUpdate(Colector[0].sId, index);
       }
     });
@@ -180,8 +179,6 @@ class _StartState extends State<Start> {
                 ],
               ),
               onPressed: () {
-                print(Exercises[indexExercices].correct);
-                print(_character.index);
                 if(Exercises[indexExercices].correct-1 == _character.index){
                   showGeneralDialog(
                       barrierColor: Colors.black.withOpacity(0.5),
@@ -203,12 +200,12 @@ class _StartState extends State<Start> {
                           ),
                         );
                       },
-                      transitionDuration: Duration(milliseconds: 500),
+                      transitionDuration: Duration(milliseconds: 200),
                       barrierDismissible: true,
                       barrierLabel: '',
                       context: context,
                       pageBuilder: (context, animation1, animation2) {var a; return a; });
-                  Future.delayed(Duration(milliseconds: 2000), () {
+                  Future.delayed(Duration(milliseconds: 800), () {
                     Navigator.pop(context);
                   });
                   indexExercices = indexExercices+1;
@@ -275,12 +272,8 @@ class _StartState extends State<Start> {
                       context: context,
                       pageBuilder: (context, animation1, animation2) {var a; return a; });
                 }
-
-
               }
             ),
-
-
             IconButton(
               icon: Icon(Icons.arrow_forward_ios),
               color: Colors.black.withOpacity(0.5),
@@ -296,7 +289,7 @@ class _StartState extends State<Start> {
       appBar: AppBar(
           backgroundColor: HexColor('#480064'),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(0), bottom: Radius.circular(40)),),
-          title: Center(child: Text(widget.title,))
+          title: Padding(padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.15), child: Center(child: Text(widget.title,)),)
       ),
       body: ListView(
         padding: EdgeInsets.all(10),
@@ -312,7 +305,6 @@ class _StartState extends State<Start> {
                 scrollDirection: Axis.horizontal,
                 itemCount: indexExercicesBuilder,
                 itemBuilder: (BuildContext context, int index) {
-
                   return GestureDetector(
                     child: Container(
                       margin: const EdgeInsets.all(4.0),
@@ -336,6 +328,7 @@ class _StartState extends State<Start> {
                       ),
                     ),
                     onTap: (){
+                      indexExercices = index;
                       _ChangeText(index);
                     },
                   );
@@ -382,62 +375,6 @@ class _StartState extends State<Start> {
                 )
             ),
           ),
-
-//          Container(
-//            height: 70,
-//            child: Padding(
-//                padding: EdgeInsets.only(top:10, left: 175, right: 175, bottom: 20),
-//                child: Card(
-//                    semanticContainer: true,
-//                    elevation: 10,
-//                    shape: RoundedRectangleBorder(
-//                        borderRadius: BorderRadius.circular(10)
-//                    ),
-//                    child: GestureDetector(
-//                      child: Stack(
-//                        alignment: Alignment.center,
-//                        children: <Widget>[
-//                        ],
-//                      ),
-//                      onTap: (){
-//                        return showDialog(
-//                            context: context,
-//                            builder: (BuildContext context) {
-//                              return Card(
-//                                margin: EdgeInsets.all(50),
-//                                child: GridView.builder(
-//                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5, crossAxisSpacing: 0,),
-//                                    itemCount: 50,
-//                                    itemBuilder: (context, index) {
-//                                      return GestureDetector(
-//                                        onTap: (){
-//                                          setState(() {
-//                                          });
-//                                          Navigator.pop(context);
-//                                        },
-//                                        child: Card(
-//                                          shape: RoundedRectangleBorder(
-//                                            borderRadius: BorderRadius.circular(10.0),
-//                                          ),
-//                                          elevation: 50,
-//                                          color: Colors.brown[800],
-//                                          child: Stack(
-//                                            alignment: Alignment.center,
-//                                            children: <Widget>[
-//
-//                                            ],
-//                                          ),
-//                                        ),
-//                                      );
-//                                    }
-//                                ),
-//                              );
-//                            });
-//                      },
-//                    )
-//                )
-//            ),
-//          ),
         ],
       ),
     );

@@ -143,7 +143,7 @@ class _ExercicesState extends State<Exercices> {
                                                           animation: true,
                                                           percent: percent,
                                                           center: Text(
-                                                            percentText,
+                                                            percentText.replaceRange(2, (percent.toString().length-1), ''),
                                                             style:
                                                             TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                                                           ),
