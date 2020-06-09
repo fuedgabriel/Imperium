@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:Imperium/request/Json/Matter/JsonColector.dart';
 import 'package:Imperium/request/Json/Matter/JsonExercises.dart';
-import 'package:flutter/hex_color.dart';
+import 'package:Imperium/screens/Widget/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
