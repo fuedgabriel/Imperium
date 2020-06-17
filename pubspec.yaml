@@ -45,8 +45,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/biologia.png
     - assets/backgroud.png
-    - assets/filosofia.jpg
-    - assets/math.jpg
-    - assets/redacao.png
