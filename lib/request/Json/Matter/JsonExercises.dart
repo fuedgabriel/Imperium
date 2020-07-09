@@ -2,11 +2,23 @@ class JsonExercises {
   List<Answers> answers;
   String sId;
   String title;
+  String subTitle;
+  String image;
+  String titlePos;
+  String subTitlePos;
   int correct;
   String questions;
 
   JsonExercises(
-      {this.answers, this.sId, this.title, this.correct, this.questions});
+      {this.answers,
+        this.sId,
+        this.title,
+        this.subTitle,
+        this.image,
+        this.titlePos,
+        this.subTitlePos,
+        this.correct,
+        this.questions});
 
   JsonExercises.fromJson(Map<String, dynamic> json) {
     if (json['Answers'] != null) {
@@ -17,6 +29,10 @@ class JsonExercises {
     }
     sId = json['_id'];
     title = json['Title'];
+    subTitle = json['SubTitle'];
+    image = json['Image'];
+    titlePos = json['TitlePos'];
+    subTitlePos = json['SubTitlePos'];
     correct = json['Correct'];
     questions = json['Questions'];
   }
@@ -28,6 +44,10 @@ class JsonExercises {
     }
     data['_id'] = this.sId;
     data['Title'] = this.title;
+    data['SubTitle'] = this.subTitle;
+    data['Image'] = this.image;
+    data['TitlePos'] = this.titlePos;
+    data['SubTitlePos'] = this.subTitlePos;
     data['Correct'] = this.correct;
     data['Questions'] = this.questions;
     return data;

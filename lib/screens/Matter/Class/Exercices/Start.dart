@@ -24,6 +24,10 @@ class _StartState extends State<Start> {
   List<JsonExercises> Exercises;
   String TitlePage = 'Carregando...';
   String Title = 'Carregando...';
+  String SubTitle = 'Carregando...';
+  String ImageStr = 'Carregando...';
+  String TitlePos = 'Carregando...';
+  String SubTitlePos = 'Carregando...';
   String A = 'Carregando...';
   String B = 'Carregando...';
   String C = 'Carregando...';
@@ -95,6 +99,10 @@ class _StartState extends State<Start> {
       setState(() {
         _character = null;
         Title = Exercises[index].title;
+        SubTitle = Exercises[index].subTitle;
+        ImageStr = Exercises[index].image;
+        TitlePos = Exercises[index].subTitle;
+        SubTitlePos = Exercises[index].subTitlePos;
         A = Exercises[index].answers[0].s1;
         B = Exercises[index].answers[0].s2;
         C = Exercises[index].answers[0].s3;
@@ -108,10 +116,7 @@ class _StartState extends State<Start> {
       });
     } on Exception catch (_) {
       print('_');
-
     }
-
-
   }
 
   Widget AnswersWidget(Title,SingingCharacter Op, Anserw) {
@@ -138,6 +143,78 @@ class _StartState extends State<Start> {
               MaterialButtonIcon = Icons.send;
             });
           },
+        ),
+      );
+    }
+  }
+
+  Widget TitleWidget(Title,) {
+    if(Title == "" || Title ==null){
+      return Container();
+    }
+    else{
+      return Text(
+        Title,
+        style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold
+        ),
+      );
+    }
+  }
+
+  Widget TextWidget(Title,) {
+    if(Title == "" || Title ==null){
+      return Container();
+    }
+    else{
+      return Text(
+        Title,
+        style: TextStyle(
+            color: Colors.white,
+            fontSize: 16
+        ),
+      );
+    }
+  }
+
+  Widget ImageWidget(link,) {
+    if(link == "" || link ==null){
+      return Container();
+    }
+    else{
+      return Image(
+          image: NetworkImage(link)
+      );
+    }
+  }
+  Widget TitlePosWidget(Title,) {
+    if(Title == "" || Title ==null){
+      return Container();
+    }
+    else{
+      return Text(
+        Title,
+        style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+          fontWeight: FontWeight.bold
+        ),
+      );
+    }
+  }
+
+  Widget TextPosWidget(Title,) {
+    if(Title == "" || Title ==null){
+      return Container();
+    }
+    else{
+      return Text(
+        Title,
+        style: TextStyle(
+            color: Colors.white,
+            fontSize: 16
         ),
       );
     }
@@ -336,12 +413,11 @@ class _StartState extends State<Start> {
               )
           ),
           SizedBox(height: 10,),
-          Text(Title,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16
-            ),
-          ),
+          TitleWidget(Title),
+          TextWidget(SubTitle),
+          ImageWidget(ImageStr),
+          TitlePosWidget(TitlePos),
+          TextPosWidget(SubTitlePos),
           Divider(),
           AnswersWidget(A, SingingCharacter.A, AnserwA),
           Divider(),

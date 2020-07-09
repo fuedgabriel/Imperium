@@ -4,6 +4,7 @@ import '../Config/Config.dart';
 import '../Matter/Matter.dart';
 import '../Home/Home.dart';
 import '../News/News.dart';
+import '../Simulator/Simulator.dart';
 
 class BottonBar extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _BottonBar extends State<BottonBar> {
   PageController _c;
   @override
   void initState(){
-    _c =  new PageController(
+    _c = PageController(
       initialPage: _currentIndex,
     );
     super.initState();
@@ -24,6 +25,7 @@ class _BottonBar extends State<BottonBar> {
     Matter(),
     News(),
     Home(),
+    Simulator(),
     Config()
   ];
 
@@ -42,16 +44,20 @@ class _BottonBar extends State<BottonBar> {
           ),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
+              icon: Icon(Icons.school),
               title: Text('Matérias'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chrome_reader_mode),
+              icon: Icon(Icons.notifications),
               title: Text('Notícias'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               title: Text('Início'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chrome_reader_mode),
+              title: Text('Simulados'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
@@ -77,6 +83,7 @@ class _BottonBar extends State<BottonBar> {
           Matter(),
           News(),
           Home(),
+          Simulator(),
           Config()
         ],
       ),
