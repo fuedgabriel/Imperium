@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:Imperium/screens/Account/Account.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -110,7 +111,7 @@ class _LoginState extends State<Login> {
 
                   child: Image(height: 250,image: NetworkImage('https://i.imgur.com/CNrErQD.png')),
                 ),
-//                
+//
 //                Transform.translate(
 //                  offset: Offset(0, 30),
 //                  child: SvgPicture.string(
@@ -187,18 +188,22 @@ class _LoginState extends State<Login> {
                   APILOGIN.postLogin(_textFieldControllerEmail.text, _textFieldControllerSenha.text).then((response) async {
                     var login = json.decode(response.body);
                     List<String> lista = [];
-                    if((login[0]) != null){
+
+                    if((login) != null){
                       setState(() {
                         textLogin = "Login efetuado com sucesso";
                         colorLogin = Colors.green;
                       });
-                      lista.add((login[0]['Courser'][0]['1']));
-                      lista.add((login[0]['Courser'][0]['2']));
-                      lista.add((login[0]['Courser'][0]['3']));
-                      lista.add((login[0]['Courser'][0]['4']));
-                      lista.add((login[0]['Courser'][0]['5']));
+
+                      lista.add((login['Courser'][0]['1']));
+                      lista.add((login['Courser'][0]['2']));
+                      lista.add((login['Courser'][0]['3']));
+                      lista.add((login['Courser'][0]['4']));
+                      lista.add((login['Courser'][0]['5']));
+                      lista.add((login['Courser'][0]['6']));
                       lista.remove(null); lista.remove(null); lista.remove(null); lista.remove(null);
-                      _saveLogin(login[0]['Email'], login[0]['Name'], login[0]['Matricula'], login[0]['_id'], lista);
+                      _saveLogin(login['Email'], login['Name'], login['Matricula'], login['_id'], lista);
+
                       Navigator.pushReplacementNamed(context, '/BottonBar');
                     }
                     else{
@@ -212,7 +217,25 @@ class _LoginState extends State<Login> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                 borderSide: BorderSide(),
                 child: Text(
-                  'Efetuar login',
+                  'Entrar',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 20,),
+            Container(
+              padding: EdgeInsets.only(left: 20, right: 20,),
+              height: 40,
+              child: OutlineButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Account()));
+                },
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                borderSide: BorderSide(),
+                child: Text(
+                  'Criar Conta',
                   style: TextStyle(
                     fontSize: 16,
                   ),

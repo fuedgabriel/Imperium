@@ -21,7 +21,7 @@ class MyCourses extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15),
+      padding: EdgeInsets.only(top: 30),
       scrollDirection: Axis.vertical,
       itemCount: matter.length,
       itemBuilder: (BuildContext context, int index) {

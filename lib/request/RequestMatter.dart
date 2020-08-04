@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-const String ip = 'http://200.222.156.85:7844/api';
+const String ip = 'http://animeseempresa.servehttp.com:7844/api';
 
 class APIMatter {
   // ignore: non_constant_identifier_names

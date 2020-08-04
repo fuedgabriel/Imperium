@@ -39,37 +39,46 @@ class _ClassState extends State<Class> {
             }),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+
                 return ListView.builder(
                     itemCount: videos.length,
                     padding: EdgeInsets.only(top: 20),
                     itemBuilder: (context, index){
-                      return Card(
+                      IconData videoWidget = Icons.file_download;
+                      if(videos[index].doc == null || videos[index].doc == ""){
 
+                         videoWidget = Icons.videocam;
+                      }
+                      return Card(
                         elevation: 5,
                         margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
                         child: Container(
                           decoration: BoxDecoration(color: Colors.white60),
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                            leading: Container(
-                              padding: EdgeInsets.only(right: 12.0),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      right: BorderSide(width: 1.0, color: Colors.black26))),
-                              child: Icon(Icons.videocam),
+                            leading: IconButton(
+                              icon: Icon(videoWidget, color: Colors.black54,),
+                              onPressed: (){
+                                if(videoWidget == Icons.videocam){
+                                  _launchURL(videos[index].link);
+                                }else{
+                                  _launchURL(videos[index].doc);
+                                }
+
+                              },
                             ),
                             title: Text(
                               videos[index].title,
                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                             ),
-                            trailing: GestureDetector(
-                              child: Icon(
-                                  Icons.play_circle_outline,
-                                  color: Colors.brown,
-                                  size: 40.0
-                              ),
-                              onTap: (){
-                                _launchURL(videos[index].link);
+                            trailing: IconButton(
+                              icon: Icon(Icons.play_circle_outline, color: Colors.brown, size: 40.0),
+                              onPressed: (){
+                                if(videoWidget == Icons.videocam){
+                                  _launchURL(videos[index].link);
+                                }else{
+                                  _launchURL(videos[index].doc);
+                                }
                               },
                             ),
                           ),
@@ -85,6 +94,30 @@ class _ClassState extends State<Class> {
             }));
   }
 
+//  Widget CheckWidget(id, Title, index) {
+//    if(Title == "" || Title ==null){
+//      return Container();
+//    }
+//    else{
+//      return CheckboxListTile(
+//        title: Text(Title, ),
+//        value: checkedValue[index],
+//        onChanged: (newValue) {
+//          setState(() {
+//            checkedValue[index] = newValue;
+//            if(newValue == false){
+//              matter.remove(id);
+//            }else{
+//              matter.add(id);
+//            }
+//
+//
+//          });
+//        },
+//        controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+//      );
+//    }
+//  }
 
   @override
   Widget build(BuildContext context) {

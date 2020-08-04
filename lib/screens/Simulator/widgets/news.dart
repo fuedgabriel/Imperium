@@ -17,7 +17,7 @@ class ProofsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      padding: EdgeInsets.symmetric(horizontal: 0.0),
+      padding: EdgeInsets.only(top: 30),
       scrollDirection: Axis.vertical,
       itemCount: proofs.length,
       itemBuilder: (BuildContext context, int index) {

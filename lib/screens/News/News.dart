@@ -28,8 +28,9 @@ class _News extends State<News> {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
       body: ListView(
-        children: <Widget>[
-          NewsCard(live: live,)
+          padding: EdgeInsets.only(top: 30),
+          children: <Widget>[
+            NewsCard(live: live,)
         ]
       )
     );

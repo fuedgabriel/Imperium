@@ -40,7 +40,7 @@ class _ConfigState extends State<Config> {
     return Scaffold(
         backgroundColor: Colors.deepPurple,
         body: ListView(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.only(top: 30),
           children: <Widget>[
             Container(
               height: 200,
@@ -106,7 +106,7 @@ class _ConfigState extends State<Config> {
             ),
             ListTile(
               leading: Icon(Icons.email, color: Colors.white, size: 32,),
-              title: Text('Envie uma sugestão ou crítica do aplicativo', style: TextStyle(color: Colors.white, ) ,),
+              title: Text('Envie uma sugestão, crítica e erros relacionados ao aplicativo', style: TextStyle(color: Colors.white, ) ,),
               subtitle: Text('fuedgabriel@hotmail.com', style: TextStyle(color: Colors.yellow),),
               trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {

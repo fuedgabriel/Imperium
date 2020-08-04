@@ -69,6 +69,7 @@ class _Home extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
       body: ListView(
+        padding: EdgeInsets.only(top: 30),
         children: <Widget>[
           ContentScrollNews(typpe: 'Notícias', newsTitle: TitleZero, images: ImageZero, link: LinkZero,),
           ContentScrollNews(typpe: 'Repertório', newsTitle: TitleOne, images: ImageOne, link: LinkOne,),

@@ -101,7 +101,7 @@ class _StartState extends State<Start> {
         Title = Exercises[index].title;
         SubTitle = Exercises[index].subTitle;
         ImageStr = Exercises[index].image;
-        TitlePos = Exercises[index].subTitle;
+        TitlePos = Exercises[index].titlePos;
         SubTitlePos = Exercises[index].subTitlePos;
         A = Exercises[index].answers[0].s1;
         B = Exercises[index].answers[0].s2;
