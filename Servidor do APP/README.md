@@ -15,7 +15,8 @@ Servidor feito em node + mongodb
 ## [host: 127.0.0.1:7844/api](http://127.0.0.1:7844/api)
 
 ## Rotas:
-#Users
+#Users  
+
 `routes.post('/User', Users.insert);`
 `routes.post('/User/id', Users.login);`
 `routes.get('/User/all/', Users.selectall);`
@@ -24,8 +25,10 @@ Servidor feito em node + mongodb
 
 `routes.get('/Course/search/:id', Course.selectid);`  
 
-`routes.get('/Course/all', Course.selectall);`
+`routes.get('/Course/all', Course.selectall);`  
+
 //Proof  
+
 `routes.post('/Proof', Proof.insert);`
 `routes.get('/Proof/search/:id', Proof.selectid);`
 `routes.get('/Proof/all', Proof.selectall);`
