@@ -1,16 +1,97 @@
-# android
+# video_box
 
-Imperium concursos
+Play video in Flutter
 
-## Getting Started
+note:
+* Only tested on android
 
-This project is a starting point for a Flutter application.
+android: `<project root>/android/app/src/main/AndroidManifest.xml`:
+```
+<uses-permission android:name="android.permission.INTERNET" />
+```
 
-A few resources to get you started if this is your first Flutter project:
+ios: `<project root>/ios/Runner/Info.plist`:
+```
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <true/>
+</dict>
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Usage
+```dart
+import 'package:flutter/material.dart';
+import 'package:video_box/video.controller.dart';
+import 'package:video_box/video_box.dart';
+import 'package:video_player/video_player.dart';
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+class ListVideo extends StatefulWidget {
+  @override
+  _ListVideoState createState() => _ListVideoState();
+}
+
+class _ListVideoState extends State<ListVideo> {
+  List<VideoController> vcs = [];
+
+  @override
+  void initState() {
+    super.initState();
+    for (var i = 0; i < 4; i++) {
+      vcs.add(VideoController(source: VideoPlayerController.network(src1))
+        ..initialize());
+    }
+  }
+
+  @override
+  void dispose() {
+    for (var vc in vcs) {
+      vc.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('list video'),
+      ),
+      body: ListView(
+        children: <Widget>[
+          for (var vc in vcs)
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: VideoBox(controller: vc),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+Catch the error during initialize
+```dart
+  vc = VideoController(
+    source: VideoPlayerController.network('https://examole.com/a.mp4'),
+  )
+    ..addInitializeErrorListenner((e) {
+      print('[video box init] error: ' + e.message);
+    })
+    ..initialize().then((e) {
+      if (e != null) {
+        print('[video box init] error: ' + e.message);
+      } else {
+        print('[video box init] success');
+      }
+    });
+```
+
+For details, see /example or source code.
+
+show:
+![](https://i.loli.net/2019/07/07/5d22104b8690b94290.jpg)
