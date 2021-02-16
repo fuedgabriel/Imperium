@@ -20,8 +20,10 @@ Servidor feito em node + mongodb
 `routes.post('/User/id', Users.login);`
 `routes.get('/User/all/', Users.selectall);`
 //Course  
-`routes.post('/Course', Course.insert);`
-`routes.get('/Course/search/:id', Course.selectid);`
+`routes.post('/Course', Course.insert);`  
+
+`routes.get('/Course/search/:id', Course.selectid);`  
+
 `routes.get('/Course/all', Course.selectall);`
 //Proof  
 `routes.post('/Proof', Proof.insert);`
