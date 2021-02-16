@@ -1,4 +1,4 @@
-# Esudos
+# App de estudos
 
 Aplicativo de estudos em Flutter
 
