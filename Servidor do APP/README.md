@@ -18,8 +18,11 @@ Servidor feito em node + mongodb
 `
 //Users
 ´routes.post('/User', Users.insert);  
+
 routes.post('/User/id', Users.login);  
+
 routes.get('/User/all/', Users.selectall);  
+
 //Course  
 routes.post('/Course', Course.insert);  
 routes.get('/Course/search/:id', Course.selectid);  
