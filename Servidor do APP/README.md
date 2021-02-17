@@ -55,7 +55,7 @@ Servidor feito em node + mongodb
 
 `routes.get('/CourseProof/all', CourseProof.selectall);`  
 
-#Matter  
+#Course  
 
 `routes.post('/Course', Course.insert);`  
 
@@ -63,7 +63,8 @@ Servidor feito em node + mongodb
 
 `routes.get('/Course/all', Course.selectall);`  
 
-#Matter
+#Matter  
+
 `routes.post('/Matter', Matter.insert);`  
 
 `routes.get('/Matter/search/:id', Matter.selectid);`  
