@@ -31,7 +31,7 @@ Servidor feito em node + mongodb
 
 `routes.get('/Course/all', Course.selectall);`  
 
-//Proof  
+#Proof  
 
 `routes.post('/Proof', Proof.insert);`  
 
