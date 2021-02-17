@@ -17,10 +17,14 @@ Servidor feito em node + mongodb
 ## Rotas:
 #Users  
 
-`routes.post('/User', Users.insert);`
-`routes.post('/User/id', Users.login);`
-`routes.get('/User/all/', Users.selectall);`
-//Course  
+`routes.post('/User', Users.insert);`  
+
+`routes.post('/User/id', Users.login);`  
+
+`routes.get('/User/all/', Users.selectall);`  
+
+#Course  
+
 `routes.post('/Course', Course.insert);`  
 
 `routes.get('/Course/search/:id', Course.selectid);`  
@@ -76,7 +80,8 @@ Servidor feito em node + mongodb
 
 `routes.get('/Class/all', Class.selectall);`  
 
-#Question
+#Question  
+
 `routes.post('/Question', Question.insert);`  
 
 `routes.get('/Question/search/matter/:Matter', Question.selectsearch);`  
